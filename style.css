@@ -1,0 +1,132 @@
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family:sans-serif;
+    }
+
+    body {
+      height: 100%;
+      width: 100%;
+    }
+
+    .container {
+      display: flex;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .split {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      color: #fff;
+      text-align: center;
+      position: relative;
+      transition: all 0.6s ease;
+      overflow: hidden;
+    }
+
+    /* Background images with gradient overlay */
+    .left {
+      background: url("https://picsum.photos/id/1015/1000/1500") center/cover no-repeat;
+    }
+
+    .right {
+      background: url("https://picsum.photos/id/1016/1000/1500") center/cover no-repeat;
+    }
+
+    .split::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.3));
+      z-index: 1;
+      transition: all 0.5s ease;
+    }
+
+    .split h1 {
+      font-size: 4rem;
+      margin-bottom: 1.5rem;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      z-index: 2;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeUp 1s ease forwards;
+    }
+
+    .btn {
+      padding: 14px 36px;
+      border: 2px solid #fff;
+      border-radius: 40px;
+      background: transparent;
+      color: #fff;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.4s ease;
+      text-decoration: none;
+      z-index: 2;
+      position: relative;
+    }
+
+    .btn::after {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      border-radius: 40px;
+      background: rgba(255, 255, 255, 0.2);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+    .split:hover .btn {
+      background: #fff;
+      color: #000;
+      transform: scale(1.08);
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
+    }
+
+    .split:hover .btn::after {
+      opacity: 1;
+    }
+
+    /* Expanding split effect */
+    .container:hover .split {
+      flex: 0.8;
+    }
+
+    .container:hover .split:hover {
+      flex: 1.2;
+    }
+
+    /* Animations */
+    @keyframes fadeUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+
+      .split {
+        height: 50vh;
+      }
+
+      .split h1 {
+        font-size: 2rem;
+      }
+
+      .container:hover .split,
+      .container:hover .split:hover {
+        flex: 1; /* disable expand effect on mobile */
+      }
+    }
